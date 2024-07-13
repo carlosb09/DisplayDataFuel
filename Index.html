@@ -1,4 +1,12 @@
-<script>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Datos Recibidos</title>
+</head>
+<body>
+  <h1>Datos Recibidos</h1>
+  <p id="data">Esperando datos...</p>
+  <script>
   // Cambia la URL para que apunte a tu servidor en Glitch
   fetch('https://shaded-foul-possum.glitch.me/getdata')
     .then(response => response.json())
@@ -11,5 +19,6 @@
       }
     })
     .catch(error => console.error('Error:', error));
-</script>
-
+  </script>
+</body>
+</html>
