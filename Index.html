@@ -7,18 +7,18 @@
   <h1>Datos Recibidos</h1>
   <p id="data">Esperando datos...</p>
   <script>
-  // Cambia la URL para que apunte a tu servidor en Glitch
-  fetch('https://shaded-foul-possum.glitch.me/getdata')
-    .then(response => response.json())
-    .then(data => {
-      if (data.length > 0) {
-        const lastEntry = data[data.length - 1]; // Obtener la última entrada de datos
-        document.getElementById('data').textContent = `Field1: ${lastEntry.field1}, Field2: ${lastEntry.field2}`;
-      } else {
-        document.getElementById('data').textContent = 'No data received yet';
-      }
-    })
-    .catch(error => console.error('Error:', error));
+    // Cambia la URL para que apunte a tu servidor en Glitch
+    fetch('https://shaded-foul-possum.glitch.me/getdata')
+      .then(response => response.json())
+      .then(data => {
+        if (data.length > 0) {
+          const lastEntry = data[data.length - 1]; // Obtener la última entrada de datos
+          document.getElementById('data').textContent = `Field1: ${lastEntry.field1}, Field2: ${lastEntry.field2}`;
+        } else {
+          document.getElementById('data').textContent = 'No hay datos recibidos aún';
+        }
+      })
+      .catch(error => console.error('Error:', error));
   </script>
 </body>
 </html>
