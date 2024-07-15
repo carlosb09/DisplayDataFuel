@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Datos Recibidos.....</title>
+  <title>INFORMACIÓN DE LOS VEHÍCULOS</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -20,6 +20,8 @@
       margin-bottom: 20px;
       text-align: center;
       width: 100%;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
     }
 
     .grid-container {
@@ -36,6 +38,12 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
 
     .loader {
@@ -52,34 +60,39 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    .data {
+      font-size: 1.2em;
+      color: #555;
+    }
   </style>
 </head>
 <body>
-  <h1>Datos Recibidos</h1>
+  <h1>INFORMACIÓN DE LOS VEHÍCULOS</h1>
   <div class="grid-container">
     <div class="container">
       <div class="loader" id="loader1"></div>
-      <p id="data1">Esperando datos...</p>
+      <p id="data1" class="data">Esperando datos...</p>
     </div>
     <div class="container">
-      <div class="loader" id="loader2"></div>
-      <p id="data2">Esperando datos...</p>
+      <div class="loader"></div>
+      <p class="data">Datos estáticos 1</p>
     </div>
     <div class="container">
-      <div class="loader" id="loader3"></div>
-      <p id="data3">Esperando datos...</p>
+      <div class="loader"></div>
+      <p class="data">Datos estáticos 2</p>
     </div>
     <div class="container">
-      <div class="loader" id="loader4"></div>
-      <p id="data4">Esperando datos...</p>
+      <div class="loader"></div>
+      <p class="data">Datos estáticos 3</p>
     </div>
     <div class="container">
-      <div class="loader" id="loader5"></div>
-      <p id="data5">Esperando datos...</p>
+      <div class="loader"></div>
+      <p class="data">Datos estáticos 4</p>
     </div>
     <div class="container">
-      <div class="loader" id="loader6"></div>
-      <p id="data6">Esperando datos...</p>
+      <div class="loader"></div>
+      <p class="data">Datos estáticos 5</p>
     </div>
   </div>
   <script>
@@ -93,21 +106,18 @@
       }
     };
 
-    const fetchData = (id, loaderId) => {
+    const fetchData = () => {
       fetch('https://shaded-foul-possum.glitch.me/getdata')
         .then(response => response.json())
-        .then(data => updateData(id, loaderId, data))
+        .then(data => updateData('data1', 'loader1', data))
         .catch(error => {
-          document.getElementById(loaderId).style.display = 'none';
-          document.getElementById(id).textContent = 'Error al recibir los datos';
+          document.getElementById('loader1').style.display = 'none';
+          document.getElementById('data1').textContent = 'Error al recibir los datos';
           console.error('Error:', error);
         });
     };
 
-    for (let i = 1; i <= 6; i++) {
-      fetchData(`data${i}`, `loader${i}`);
-    }
+    fetchData();
   </script>
 </body>
 </html>
-
