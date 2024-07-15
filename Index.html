@@ -2,15 +2,70 @@
 <html>
 <head>
   <title>Datos Recibidos.....</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #007BFF;
+      margin-bottom: 20px;
+    }
+
+    #data {
+      font-size: 24px;
+      font-weight: bold;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+      text-align: center;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .loader {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #007BFF;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 2s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
-  <h1>Datos Recibidos</h1>
-  <p id="data">Esperando datos...</p>
+  <div class="container">
+    <h1>Datos Recibidos</h1>
+    <div class="loader" id="loader"></div>
+    <p id="data">Esperando datos...</p>
+  </div>
   <script>
     // Cambia la URL para que apunte a tu servidor en Glitch
     fetch('https://shaded-foul-possum.glitch.me/getdata')
       .then(response => response.json())
       .then(data => {
+        document.getElementById('loader').style.display = 'none';
         if (data.length > 0) {
           const lastEntry = data[data.length - 1]; // Obtener la última entrada de datos
           document.getElementById('data').textContent = `Field1: ${lastEntry.field1}, Field2: ${lastEntry.field2}`;
@@ -18,7 +73,12 @@
           document.getElementById('data').textContent = 'No hay datos recibidos aún';
         }
       })
-      .catch(error => console.error('Error:', error));
+      .catch(error => {
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('data').textContent = 'Error al recibir los datos';
+        console.error('Error:', error);
+      });
   </script>
 </body>
 </html>
+
